@@ -1,4 +1,4 @@
-const GRID_W = 160, GRID_H = 120; // scaled down from 640x480 for perf
+const GRID_W = 160, GRID_H = 120; 
 const grid = new Uint8Array(GRID_W * GRID_H); // 0 = empty, else = color index
 
 const COLORS = [
@@ -21,6 +21,7 @@ function spawnSand(px, py, colorIndex, radius = 2) {
       const x = gx + dx, y = gy + dy;
       if (x < 0 || x >= GRID_W || y < 0 || y >= GRID_H) continue;
       if (Math.random() < 0.5) continue;
+      if (grid[y * GRID_W + x] !== 0) continue; // don't overwrite sand that's already there
       grid[y * GRID_W + x] = colorIndex;
     }
   }
